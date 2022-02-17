@@ -5,7 +5,6 @@ import '../App.css';
 const Calculator = () => {
   const [firstINT, setFirstINT] = useState("");
   const [secondINT, setSecondINT] = useState("");
-  const [output, setOutput] = useState("");
 
   //identify operators so that we can say after we've typed an op we now start the second integer
   const operators = ["÷", "x", "+", "-", "."];
@@ -31,33 +30,29 @@ const Calculator = () => {
           
     setFirstINT (firstINT + value);
   };
-  const updateCalc2 = value => {
-    if (
-      operators.includes(value) && secondINT === '' ||
-      operators.includes(value) && operators.includes(secondINT.slice(-1)
-      ))
-      {
-        return
-      }
-          
-    setSecondINT (secondINT + value);
-  };
 
 
-
-
+  const getSolution = () => {
+    axios.get("/api/solution")
+  }
 
   const Submit = () => {
-    axios.post("/api/sum", {firstINT, secondINT})
-  }
+    axios.post("/api/add", {firstINT, secondINT})
+    .then (() => {
+      getSolution();
+    })
+    .catch((err) => console.log(err))
+  };
 
 
   return (
     <div className='calculator-grid'>
+      <input value={firstINT} onChange={e => setFirstINT (e.target.value)} />
+      <input value={secondINT} onChange={e => setSecondINT (e.target.value)} />
         <div className='display'>
           
-          <div className='firstINT'>{firstINT}</div>
-          <div className='secondINT'>{secondINT}</div>
+          {/* <div className='firstINT'>{firstINT}</div> 
+          <div className='secondINT'>{secondINT}</div> */}
         </div>
         {/* onclick remove last entered item, use put method  */}
         <button className='wide-btn span-two'> C</button>

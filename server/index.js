@@ -1,7 +1,6 @@
 require('dotenv').config();
-// const massive = require('massive');
 const express = require('express');
-var bodyParser = require('body-parser');
+
 
 
 const app = express();
@@ -10,24 +9,17 @@ const { SERVER_PORT} = process.env;
 
 app.use(express.json());
 
-
 //end points
-app.get('/api/sum')
-
-app.post('/api/add')
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '../../index.html'); //Gets the html
-});
+app.get('/api/solution')
 
 
 
-app.post('/submission', function(req, res) {
- var first = parseInt(req.body.firstNumber);
- var second = parseInt(req.body.lastNumber);
-  var sum = Number(first + second);
-  res.send('The sum is: ' + Number(sum));
- })
+app.post('/api/add', function(req, res) {
+ var firstINT = parseInt(req.body.firstINT);
+ var secondINT = parseInt(req.body.secondINT);
+  var solution = Number(firstINT + secondINT);
+  res.send('The sum is: ' + Number(solution));
+})
 
 
 
