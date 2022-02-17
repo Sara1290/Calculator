@@ -15,9 +15,9 @@ app.get('/api/solution')
 
 
 app.post('/api/add', function(req, res) {
- var firstINT = parseInt(req.body.firstINT);
- var secondINT = parseInt(req.body.secondINT);
-  var solution = Number(firstINT + secondINT);
+ let firstINT = parseInt(req.body.firstINT);
+ let secondINT = parseInt(req.body.secondINT);
+  let solution = Number(firstINT + secondINT);
   res.send('The sum is: ' + Number(solution));
 })
 
